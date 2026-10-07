@@ -1,0 +1,14 @@
+# Environment variables
+.env
+.env.*
+
+# Node / Dependencies
+node_modules/
+dist/
+build/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
