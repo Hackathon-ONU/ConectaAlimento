@@ -2,7 +2,12 @@ import React from 'react'
 import { Sprout } from 'lucide-react'
 import './Pages.css'
 
-export default function Impacto() {
+export default function Impacto({ donations = [] }) {
+  const availableCount = donations.filter((donation) => donation.status === 'Disponível').length
+  const reservedCount = donations.filter((donation) => donation.status === 'Reservada').length
+  const completedCount = donations.filter((donation) => donation.status === 'Coletada').length
+  const categories = [...new Set(donations.map((donation) => donation.categoria))]
+
   return (
     <div className="ca-page-container">
       <div className="ca-screen-header">
@@ -24,43 +29,54 @@ export default function Impacto() {
 
       {/* Grid de 4 Métricas */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.25rem', marginBottom: '3.5rem' }}>
-        <div style={{ backgroundColor: '#EAF4EC', borderRadius: '18px', padding: '1.75rem' }}>
-          <div style={{ fontSize: '3rem', fontWeight: 800, color: '#173E2D', lineHeight: 1 }}>0</div>
+        <div style={{ backgroundColor: '#EAF4EC', borderRadius: '8px', padding: '1.75rem' }}>
+          <div style={{ fontSize: '3rem', fontWeight: 800, color: '#173E2D', lineHeight: 1 }}>{donations.length}</div>
           <p style={{ fontSize: '0.88rem', color: '#4A6854', marginTop: '0.85rem', marginBottom: 0, lineHeight: 1.4 }}>
-            unidades informadas em ofertas concluídas
+            ofertas registradas neste navegador
           </p>
         </div>
 
-        <div style={{ backgroundColor: '#EAF4EC', borderRadius: '18px', padding: '1.75rem' }}>
-          <div style={{ fontSize: '3rem', fontWeight: 800, color: '#173E2D', lineHeight: 1 }}>60</div>
+        <div style={{ backgroundColor: '#EAF4EC', borderRadius: '8px', padding: '1.75rem' }}>
+          <div style={{ fontSize: '3rem', fontWeight: 800, color: '#173E2D', lineHeight: 1 }}>{availableCount}</div>
           <p style={{ fontSize: '0.88rem', color: '#4A6854', marginTop: '0.85rem', marginBottom: 0, lineHeight: 1.4 }}>
-            unidades informadas em todas as ofertas
+            ofertas disponíveis para reserva
           </p>
         </div>
 
-        <div style={{ backgroundColor: '#EAF4EC', borderRadius: '18px', padding: '1.75rem' }}>
-          <div style={{ fontSize: '3rem', fontWeight: 800, color: '#173E2D', lineHeight: 1 }}>0</div>
+        <div style={{ backgroundColor: '#FAEEE4', borderRadius: '8px', padding: '1.75rem' }}>
+          <div style={{ fontSize: '3rem', fontWeight: 800, color: '#88431E', lineHeight: 1 }}>{reservedCount}</div>
           <p style={{ fontSize: '0.88rem', color: '#4A6854', marginTop: '0.85rem', marginBottom: 0, lineHeight: 1.4 }}>
-            ofertas marcadas como coletadas
+            ofertas reservadas para retirada
           </p>
         </div>
 
-        <div style={{ backgroundColor: '#EAF4EC', borderRadius: '18px', padding: '1.75rem' }}>
-          <div style={{ fontSize: '3rem', fontWeight: 800, color: '#173E2D', lineHeight: 1 }}>5</div>
+        <div style={{ backgroundColor: '#EAF4EC', borderRadius: '8px', padding: '1.75rem' }}>
+          <div style={{ fontSize: '3rem', fontWeight: 800, color: '#173E2D', lineHeight: 1 }}>{completedCount}</div>
           <p style={{ fontSize: '0.88rem', color: '#4A6854', marginTop: '0.85rem', marginBottom: 0, lineHeight: 1.4 }}>
-            perfis fictícios neste navegador
+            ofertas com coleta confirmada
           </p>
         </div>
       </div>
 
       {/* Seção Por Categoria */}
-      <span className="ca-screen-tag">POR CATEGORIA</span>
+      <span className="ca-screen-tag">OFERTAS REGISTRADAS</span>
       <h2 style={{ fontSize: '2.25rem', fontWeight: 800, color: '#173E2D', margin: '0 0 1.5rem 0' }}>
-        Quantidade registrada.
+        Acompanhe cada publicação.
       </h2>
 
-      {/* Caixa de Empty State (Ainda não há coletas) */}
-      <div style={{
+      {donations.length > 0 ? <div style={{ display: 'grid', gap: '0.75rem' }}>
+        {categories.map((category) => (
+          <section key={category} className="ca-content-card">
+            <h3 style={{ fontSize: '1.1rem', color: '#173E2D', margin: '0 0 0.75rem' }}>{category}</h3>
+            {donations.filter((donation) => donation.categoria === category).map((donation) => (
+              <div key={donation.id} style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', padding: '0.7rem 0', borderTop: '1px solid #ECE4DA' }}>
+                <span>{donation.titulo} · {donation.qtd}</span>
+                <span>{donation.status}</span>
+              </div>
+            ))}
+          </section>
+        ))}
+      </div> : <div style={{
         border: '1.5px dashed #C8D8CC',
         borderRadius: '20px',
         padding: '4rem 2rem',
@@ -89,7 +105,7 @@ export default function Impacto() {
         <p style={{ fontSize: '0.95rem', color: '#556E5F', maxWidth: '420px', margin: 0, lineHeight: 1.5 }}>
           Quando um doador confirmar uma coleta, as quantidades registradas serão contabilizadas aqui.
         </p>
-      </div>
+      </div>}
     </div>
   )
 }

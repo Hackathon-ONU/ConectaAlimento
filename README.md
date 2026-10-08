@@ -48,6 +48,8 @@ Realizamos uma análise comparativa de 5 soluções do mercado:
 
 ## 📋 Requisitos
 
+O projeto mantém **10 requisitos funcionais (RF01–RF10)** e **10 requisitos não funcionais (RNF01–RNF10)** como critérios mínimos. Os fluxos descritos abaixo são executados no navegador; autenticação real, sincronização entre usuários e publicação em infraestrutura ainda dependem de serviços externos.
+
 ### Requisitos Funcionais (RF)
 * **RF01:** O sistema deve permitir que o comércio doador cadastre lotes de alimentos excedentes informando título, categoria, quantidade/peso, prazo de retirada e endereço.
 * **RF02:** O sistema deve permitir a alternância de perfil de usuário (Visitante, Comércio Doador e ONG Receptora).
@@ -57,8 +59,8 @@ Realizamos uma análise comparativa de 5 soluções do mercado:
 * **RF06:** O sistema deve permitir que uma ONG solicite a reserva imediata de um lote disponível.
 * **RF07:** O sistema deve atualizar o status do alimento para "Reservado" após a solicitação da ONG.
 * **RF08:** O sistema deve exibir os detalhes de contato e retirada do comércio doador para a ONG solicitante.
-* **RF09:** O sistema deve calcular e exibir indicadores consolidados de impacto social (kg de alimentos salvos, refeições estimadas, emissão de CO₂ evitada).
-* **RF10:** O sistema deve persistir as doações e reservas no navegador do usuário via LocalStorage.
+* **RF09:** O sistema deve exibir a quantidade de ofertas por status e categoria sem converter unidades diferentes em estimativas de refeições ou emissões.
+* **RF10:** O sistema deve persistir ofertas, reservas, coletas e perfil de demonstração no navegador via LocalStorage.
 
 ### Requisitos Não Funcionais (RNF)
 * **RNF01 — Responsividade:** A aplicação deve ser totalmente adaptável para dispositivos móveis, tablets e desktops (layout fluido).
@@ -66,7 +68,7 @@ Realizamos uma análise comparativa de 5 soluções do mercado:
 * **RNF03 — Desempenho:** O carregamento inicial da aplicação deve ser inferior a 2 segundos em conexões padrão.
 * **RNF04 — Arquitetura Front-end:** A aplicação deve ser desenvolvida em Single Page Application (SPA) utilizando React com separação clara de componentes.
 * **RNF05 — Usabilidade:** A publicação de um excedente pelo comércio não deve demandar mais de 4 passos na tela.
-* **RNF06 — Disponibilidade:** A aplicação deve ser hospedada em infraestrutura de alta disponibilidade com CDN global (Vercel / Netlify).
+* **RNF06 — Disponibilidade:** No deploy, a aplicação deve ser hospedada em infraestrutura de alta disponibilidade com CDN (Vercel / Netlify); esse requisito depende da publicação do projeto.
 * **RNF07 — Persistência Client-side:** O estado da aplicação deve se manter íntegro mesmo após o recarregamento da página (F5) através de LocalStorage.
 * **RNF08 — Feedback Visual:** Todas as ações do usuário (reservar, cadastrar, alternar filtro) devem fornecer retorno visual instantâneo.
 * **RNF09 — Padrões de Código:** O código-fonte deve seguir convenções limpas de JavaScript moderno (ES6+), hooks do React e componentes funcionais.
@@ -85,11 +87,15 @@ Realizamos uma análise comparativa de 5 soluções do mercado:
 
 ## ⚡ Funcionalidades
 * 🏠 **Landing Page Institucional:** Apresentação da causa, métricas da ONU e fluxo de adesão.
-* 📦 **Catálogo Dinâmico de Excedentes:** Feed com busca textual e filtros instantâneos por categoria.
-* 📝 **Cadastro Rápido de Doações:** Formulário completo com validação de dados para doadores.
-* 🤝 **Sistema de Reserva em 1 Clique:** Trava o item e exibe a ONG responsável pela coleta.
-* 📊 **Painel de Impacto ODS 2:** Monitor em tempo real de kg salvos, refeições distribuídas e CO₂ evitado.
-* 🔄 **Simulador de Perfis:** Alternância rápida entre visão de Comércio, ONG e Visitante.
+* 📦 **Catálogo de Excedentes:** Busca por alimento, comércio ou bairro e filtros por categoria, cidade e validade.
+* 📝 **Cadastro de Doações:** Formulário validado para quantidade, categoria, descrição, validade e janela de retirada; aceita imagem de até 1,5 MB.
+* 🤝 **Reserva e Coleta:** Reserva altera a disponibilidade, exibe contato para retirada e pode ser marcada como coletada no painel do doador.
+* 📊 **Painel de Impacto:** Indicadores de ofertas disponíveis, reservadas e coletadas, além da relação por categoria; não estima refeições ou CO₂.
+* 🔄 **Perfis de Demonstração:** Cadastro e edição do perfil com persistência local; login permite acessar a experiência de doador ou ONG sem autenticação real.
+* 🧭 **Navegação entre telas:** Navegação por botões, URL com hash e suporte aos comandos voltar/avançar do navegador.
+* 💾 **Persistência local:** Ofertas, reservas e dados do perfil permanecem após recarregar a página no mesmo navegador.
+
+> **Limite do protótipo:** os dados ficam no navegador utilizado. Não há backend, sincronização em tempo real entre dispositivos, autenticação, geolocalização ou rotas de coleta.
 
 ---
 
