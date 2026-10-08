@@ -2,7 +2,13 @@ import React from 'react'
 import { MapPin, Clock, Package, ArrowLeft } from 'lucide-react'
 import './Pages.css'
 
-export default function DetalheDoacao({ onNavigate }) {
+export default function DetalheDoacao({ onNavigate, donation, onReserveDonation }) {
+  if (!donation) {
+    return <div className="ca-page-container"><p role="status">Não há uma doação selecionada.</p><button type="button" className="ca-btn-light" onClick={() => onNavigate?.('feed')}>Ir para doações</button></div>
+  }
+
+  const available = donation.status === 'Disponível'
+
   return (
     <div className="ca-page-container">
       <button 
@@ -27,13 +33,13 @@ export default function DetalheDoacao({ onNavigate }) {
       <div className="ca-screen-header">
         <div className="ca-screen-header-left">
           <span className="ca-screen-tag">DETALHES DA DOAÇÃO</span>
-          <h1 className="ca-screen-title">Cestas de feira da manhã</h1>
+          <h1 className="ca-screen-title">{donation.titulo}</h1>
           <p className="ca-screen-subtitle">
-            Mercado Raiz · Pinheiros, São Paulo
+            {donation.local} · {donation.bairro}, {donation.cidade}
           </p>
         </div>
-        <span className="ca-badge ca-badge-available" style={{ fontSize: '0.9rem', padding: '0.4rem 1rem' }}>
-          Disponível
+        <span className={`ca-badge ${available ? 'ca-badge-available' : 'ca-badge-location'}`} style={{ fontSize: '0.9rem', padding: '0.4rem 1rem' }}>
+          {donation.status}
         </span>
       </div>
 
@@ -43,6 +49,9 @@ export default function DetalheDoacao({ onNavigate }) {
           {/* Espaço de imagem / placeholder visual */}
           <div style={{
             backgroundColor: '#D7E5DB',
+            backgroundImage: donation.imagem ? `url(${donation.imagem})` : undefined,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
             height: '240px',
             borderRadius: '16px',
             display: 'flex',
@@ -53,19 +62,19 @@ export default function DetalheDoacao({ onNavigate }) {
             color: '#173E2D',
             marginBottom: '1.5rem'
           }}>
-            Hortifruti
+            {!donation.imagem && donation.categoria}
           </div>
 
           <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1.25rem' }}>
-            <span className="ca-badge ca-badge-category">Hortifruti</span>
-            <span className="ca-badge ca-badge-location">8 cestas</span>
+            <span className="ca-badge ca-badge-category">{donation.categoria}</span>
+            <span className="ca-badge ca-badge-location">{donation.qtd}</span>
           </div>
 
           <h2 style={{ fontSize: '1.65rem', fontWeight: 800, color: '#173E2D', margin: '0 0 0.75rem 0' }}>
-            Cestas de feira da manhã
+            {donation.titulo}
           </h2>
           <p style={{ fontSize: '1rem', color: '#4D6656', lineHeight: 1.6, margin: '0 0 2rem 0' }}>
-            Seleção de frutas e legumes frescos que não chegaram à banca. Ideal para cozinhar hoje e amanhã.
+            {donation.desc}
           </p>
 
           <hr style={{ border: 'none', borderTop: '1px solid #ECE4DA', margin: '1.5rem 0' }} />
@@ -74,13 +83,13 @@ export default function DetalheDoacao({ onNavigate }) {
             <div>
               <span className="ca-screen-tag" style={{ fontSize: '0.75rem' }}>CONSUMIR ATÉ</span>
               <p style={{ fontSize: '1.15rem', fontWeight: 800, color: '#173E2D', margin: 0 }}>
-                09 de out.
+                {donation.validade}
               </p>
             </div>
             <div>
               <span className="ca-screen-tag" style={{ fontSize: '0.75rem' }}>RETIRADA</span>
               <p style={{ fontSize: '1.15rem', fontWeight: 800, color: '#173E2D', margin: 0 }}>
-                14:00–17:30
+                {donation.retirada}
               </p>
             </div>
           </div>
@@ -104,21 +113,24 @@ export default function DetalheDoacao({ onNavigate }) {
           </div>
 
           <div className="ca-alert-box ca-alert-peach" style={{ fontSize: '0.86rem', marginBottom: '1.5rem' }}>
-            <span>Ao reservar, sua organização confirma que poderá retirar neste horário. O contato do doador será exibido após a reserva.</span>
+              <span>{available ? 'Ao reservar, sua organização confirma que poderá retirar neste horário. O contato do doador será exibido após a reserva.' : donation.status === 'Reservada' ? `Reservada por ${donation.reservadaPor || 'uma organização'}.` : 'Esta doação já foi coletada.'}</span>
           </div>
 
           <button 
             type="button" 
             className="ca-btn-orange"
             style={{ width: '100%', justifyContent: 'center' }}
-            onClick={() => alert('Demonstração: Reserva realizada! Código de coleta gerado.')}
+            disabled={!available}
+            onClick={() => onReserveDonation?.(donation.id)}
           >
-            <Package size={18} /> Reservar esta doação
+            <Package size={18} /> {available ? 'Reservar esta doação' : donation.status}
           </button>
 
           <p style={{ fontSize: '0.82rem', color: '#7E9185', textAlign: 'center', marginTop: '1.25rem', marginBottom: 0 }}>
-            Doador: Mercado Raiz
+            Doador: {donation.local}
           </p>
+          {!available && donation.contato && <p role="status" style={{ color: '#267343', textAlign: 'center' }}>Contato para retirada: {donation.contato}</p>}
+          {donation.codigoColeta && <p style={{ color: '#173E2D', textAlign: 'center', fontWeight: 800 }}>Código de retirada: {donation.codigoColeta}</p>}
         </div>
       </div>
     </div>

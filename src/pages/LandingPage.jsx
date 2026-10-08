@@ -5,13 +5,13 @@ import StepsSection from '../components/Landing/StepsSection'
 import FooterLanding from '../components/Landing/FooterLanding'
 import './LandingPage.css'
 
-export default function LandingPage({ onNavigate }) {
+export default function LandingPage({ onNavigate, onResetDemo }) {
   return (
     <div className="lp-wrapper">
       <HeroSection onNavigate={onNavigate} />
       <ImpactSection onNavigate={onNavigate} />
       <StepsSection />
-      <FooterLanding />
+      <FooterLanding onResetDemo={onResetDemo} />
     </div>
   )
 }
