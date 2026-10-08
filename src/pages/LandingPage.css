@@ -1,0 +1,477 @@
+/* Landing Page Styles - Fidelidade ao Protótipo Figma */
+
+:root {
+  --lp-bg-main: #FBF8F3;
+  --lp-green-hero: #173E2D;
+  --lp-green-hero-dark: #123325;
+  --lp-orange-accent: #D96534;
+  --lp-orange-hover: #C55527;
+  --lp-text-dark: #173E2D;
+  --lp-text-muted: #536B5C;
+  --lp-text-body: #374E40;
+  --lp-card-donor-bg: #EAF4EC;
+  --lp-card-ong-bg: #F5EFE6;
+  --lp-border-subtle: #E2DBD0;
+  --lp-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.lp-wrapper {
+  background-color: var(--lp-bg-main);
+  min-height: 100vh;
+  font-family: var(--lp-font-family);
+  color: var(--lp-text-body);
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+}
+
+.lp-container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* =========================================
+   1. HERO SECTION
+   ========================================= */
+.lp-hero-wrapper {
+  padding: 1.25rem 1.25rem 0 1.25rem;
+}
+
+.lp-hero-card {
+  background: radial-gradient(circle at 85% 40%, #1e4d38 0%, #173E2D 60%, #112d21 100%);
+  border-radius: 28px;
+  color: #ffffff;
+  padding: 4.5rem 3.5rem;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 12px 30px rgba(23, 62, 45, 0.12);
+}
+
+/* Efeito sutil de ondas/círculos no fundo do Hero */
+.lp-hero-card::after {
+  content: "";
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  pointer-events: none;
+}
+
+.lp-hero-card::before {
+  content: "";
+  position: absolute;
+  top: -5%;
+  right: 5%;
+  width: 440px;
+  height: 440px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  pointer-events: none;
+}
+
+.lp-hero-content {
+  max-width: 650px;
+  position: relative;
+  z-index: 2;
+}
+
+.lp-tagline-orange {
+  color: var(--lp-orange-accent);
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 1.5rem;
+  display: inline-block;
+}
+
+.lp-hero-title {
+  font-size: clamp(2.4rem, 5.5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  margin: 0 0 1.5rem 0;
+  color: #ffffff;
+}
+
+.lp-hero-subtitle {
+  font-size: 1.15rem;
+  line-height: 1.55;
+  color: #C8DBD0;
+  margin: 0 0 2.25rem 0;
+  max-width: 530px;
+}
+
+.lp-hero-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.lp-btn-orange {
+  background-color: var(--lp-orange-accent);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.85rem 1.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.lp-btn-orange:hover {
+  background-color: var(--lp-orange-hover);
+  transform: translateY(-1px);
+}
+
+.lp-btn-outline {
+  background-color: transparent;
+  color: #ffffff;
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  border-radius: 8px;
+  padding: 0.85rem 1.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.lp-btn-outline:hover {
+  border-color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Selo decorativo do Hero */
+.lp-hero-badge {
+  position: relative;
+  z-index: 2;
+  margin-right: 1.5rem;
+}
+
+.lp-circle-seal {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(4px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0.5rem;
+  transform: rotate(-8deg);
+  transition: transform 0.3s ease;
+}
+
+.lp-circle-seal:hover {
+  transform: rotate(0deg) scale(1.03);
+}
+
+.lp-circle-seal span {
+  color: #D3E4D8;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+/* =========================================
+   2. SEÇÃO DE IMPACTO E PÚBLICO
+   ========================================= */
+.lp-impact-section {
+  padding: 4.5rem 0 3rem 0;
+}
+
+.lp-impact-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.lp-impact-titles {
+  max-width: 600px;
+}
+
+.lp-section-title {
+  font-size: clamp(1.8rem, 4vw, 2.75rem);
+  font-weight: 800;
+  color: var(--lp-text-dark);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.lp-section-subtitle-right {
+  font-size: 1.05rem;
+  color: var(--lp-text-muted);
+  max-width: 380px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Grid com os 2 Cards (Doador e ONG) */
+.lp-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.75rem;
+}
+
+.lp-card {
+  border-radius: 24px;
+  padding: 2.75rem 2.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.lp-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
+}
+
+.lp-card-donor {
+  background-color: var(--lp-card-donor-bg);
+}
+
+.lp-card-receiver {
+  background-color: var(--lp-card-ong-bg);
+}
+
+.lp-card-number {
+  font-size: 3.25rem;
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.03em;
+}
+
+.lp-card-donor .lp-card-number {
+  color: var(--lp-text-dark);
+}
+
+.lp-card-receiver .lp-card-number {
+  color: #BE5F31;
+}
+
+.lp-card-role {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--lp-text-dark);
+  margin: 0 0 0.85rem 0;
+}
+
+.lp-card-text {
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--lp-text-body);
+  margin: 0 0 2rem 0;
+}
+
+.lp-btn-card-donor {
+  background-color: var(--lp-green-hero);
+  color: #ffffff;
+  border: none;
+  border-radius: 30px;
+  padding: 0.8rem 1.6rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  width: fit-content;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.lp-btn-card-donor:hover {
+  background-color: var(--lp-green-hero-dark);
+}
+
+.lp-btn-card-receiver {
+  background-color: #E6DCce;
+  color: var(--lp-text-dark);
+  border: none;
+  border-radius: 30px;
+  padding: 0.8rem 1.6rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  width: fit-content;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.lp-btn-card-receiver:hover {
+  background-color: #DBD0C0;
+}
+
+/* =========================================
+   3. SEÇÃO COMO A REDE FUNCIONA (PASSOS)
+   ========================================= */
+.lp-steps-section {
+  padding: 3.5rem 0;
+}
+
+.lp-steps-header {
+  margin-bottom: 2.75rem;
+}
+
+.lp-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.lp-step-column {
+  border-top: 2px solid #DCE6DE;
+  padding-top: 1.5rem;
+}
+
+.lp-step-number {
+  color: var(--lp-orange-accent);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.65rem;
+  display: block;
+}
+
+.lp-step-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--lp-text-dark);
+  margin: 0 0 0.65rem 0;
+  line-height: 1.25;
+}
+
+.lp-step-desc {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--lp-text-muted);
+  margin: 0;
+}
+
+/* =========================================
+   4. AVISO DEMONSTRATIVO (DISCLAIMER)
+   ========================================= */
+.lp-disclaimer-box {
+  background-color: #EAF3EC;
+  border-radius: 12px;
+  padding: 1.15rem 1.5rem;
+  margin: 2.5rem 0 3.5rem 0;
+  color: #2F4D3A;
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.lp-disclaimer-box strong {
+  font-weight: 800;
+}
+
+/* =========================================
+   5. RODAPÉ DA LANDING PAGE
+   ========================================= */
+.lp-footer {
+  border-top: 1px solid var(--lp-border-subtle);
+  padding: 1.75rem 0;
+  margin-top: auto;
+}
+
+.lp-footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.lp-footer-brand {
+  font-size: 0.9rem;
+  color: var(--lp-text-muted);
+  margin: 0;
+}
+
+.lp-footer-brand strong {
+  color: var(--lp-text-dark);
+  font-weight: 700;
+}
+
+.lp-btn-restore {
+  background-color: transparent;
+  color: #556B5C;
+  border: 1px solid #D3CCC0;
+  border-radius: 6px;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.lp-btn-restore:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+  border-color: #B8B0A3;
+}
+
+/* =========================================
+   RESPONSIVIDADE (MOBILE / TABLETS)
+   ========================================= */
+@media (max-width: 900px) {
+  .lp-hero-card {
+    flex-direction: column;
+    padding: 3rem 2rem;
+    align-items: flex-start;
+  }
+
+  .lp-hero-badge {
+    margin-top: 2.5rem;
+    margin-right: 0;
+    align-self: center;
+  }
+
+  .lp-cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lp-steps-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .lp-impact-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
